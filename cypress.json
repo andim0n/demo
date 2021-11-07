@@ -1,12 +1,15 @@
 {
-  "retries": {
-    "openMode": 3,
-    "runMode": 3
-  },
-  "env": {
-    "foo": "bar"
-  },
-  "viewportHeight": 1000,
-  "viewportWidth": 1280,
-  "projectId": "esumie"
+    "retries": {
+        "openMode": 3,
+        "runMode": 3
+    },
+    "env": {
+        "foo": "bar"
+    },
+    "viewportHeight": 1000,
+    "viewportWidth": 1280,
+    "projectId": "esumie",
+    "defaultCommandTimeout": 4000,
+    "pageLoadTimeout": 60000,
+    "ignoreTestFiles": "*.WIP.spec.js"
 }
