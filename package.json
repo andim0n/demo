@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/andim0n/demo#readme",
   "dependencies": {
-    "cypress": "^8.7.0"
+    "cypress": "^8.7.0",
+    "cypress-xpath": "^1.6.2"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
