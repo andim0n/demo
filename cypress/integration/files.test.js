@@ -5,11 +5,9 @@
 const requiredExample = require('../fixtures/example.json')
 
 context('Files', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('https://example.cypress.io/commands/files')
-  })
 
-  beforeEach(() => {
     // load example.json fixture file and store
     // in the test context object
     cy.fixture('example.json').as('example')
