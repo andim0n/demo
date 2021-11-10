@@ -23,3 +23,33 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getSessionStorage', key => {
+  cy.window().then(window => window.sessionStorage.getItem(key))
+})
+
+Cypress.Commands.add('setSessionStorage', (key, value) => {
+  cy.window().then(window => {
+    window.sessionStorage.setItem(key, value)
+  })
+})
+
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  if (!options) return originalFn(url)
+
+  const domain = Cypress.env('BASE_DOMAIN')
+
+  if (options.search) {
+    url = domain
+  }
+
+  if (options.timeout > 5000) {
+    options.timeout = 5000
+  }
+
+  // originalFn is the existing `visit` command that you need to call
+  // and it will receive whatever you pass in here.
+  //
+  // make sure to add a return here!
+  return originalFn(url, options)
+})
