@@ -35,8 +35,7 @@ Cypress.Commands.add('setSessionStorage', (key, value) => {
 })
 
 Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-  if (!options) return originalFn(url)
-
+  if (!Object.keys(options).length) return originalFn(url)
   const domain = Cypress.env('BASE_DOMAIN')
 
   if (options.search) {
