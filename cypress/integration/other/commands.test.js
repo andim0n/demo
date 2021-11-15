@@ -13,3 +13,5 @@ context('Cypress custom commands', () => {
     cy.visit('https://yandex.ru', {})
   })
 })
+// best practice to deal with PO
+// https://www.cypress.io/blog/2019/01/03/stop-using-page-objects-and-start-using-app-actions/#final-thoughts

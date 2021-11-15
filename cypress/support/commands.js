@@ -1,3 +1,5 @@
+const loginPage = require('../pages/login')
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -34,21 +36,30 @@ Cypress.Commands.add('setSessionStorage', (key, value) => {
   })
 })
 
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit(loginPage.url)
+  cy.get(loginPage.input.name).type(username)
+  cy.get(loginPage.input.password).type(password)
+  cy.get(loginPage.button.submit).click()
+  cy.contains(loginPage.message)
+  cy.get(loginPage.button.logout).should('be.visible')
+})
+
 Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-  if (!Object.keys(options).length) return originalFn(url)
+  cy.log(options)
   const domain = Cypress.env('BASE_DOMAIN')
+  if (url !== domain) url = domain
+  return originalFn(url, options)
+  // if (options.search) {
+  //   url = domain
+  // }
 
-  if (options.search) {
-    url = domain
-  }
-
-  if (options.timeout > 5000) {
-    options.timeout = 5000
-  }
+  // if (options.timeout > 5000) {
+  //   options.timeout = 5000
+  // }
 
   // originalFn is the existing `visit` command that you need to call
   // and it will receive whatever you pass in here.
   //
   // make sure to add a return here!
-  return originalFn(url, options)
 })
