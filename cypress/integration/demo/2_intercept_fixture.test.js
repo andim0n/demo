@@ -1,21 +1,25 @@
 /// <reference types="cypress" />
 
-context('Intercepting with alias', () => {
-  it('intercept with alias', () => {
+const stubbedObject = describe('Spy and stub network responses', () => {
+  beforeEach(function () {
+    cy.fixture('stubbed.json').as('stubbed')
+    cy.fixture('original.json').as('original')
     cy.visit('https://example.cypress.io/commands/aliasing')
+  })
 
-    const stubbedObject = { customKey: 'TEST VALUE' }
-    // Alias the route to wait for its response
-    cy.intercept('GET', '**/comments/*', stubbedObject).as('getComment')
+  it('spying', function () {
+    cy.intercept('GET', '**/comments/*').as('getComment')
 
-    // we have code that gets a comment when
-    // the button is clicked in scripts.js
     cy.get('.network-btn').click()
 
-    // https://on.cypress.io/wait
-    cy.wait('@getComment')
-      // .its('response.statusCode').should('eq', 200)
-      .its('response.body')
-      .should('deep.equal', stubbedObject)
+    cy.wait('@getComment').its('response.body').should('deep.equal', this.original)
+  })
+
+  it('stubbing', function () {
+    cy.intercept('GET', '**/comments/*', this.stubbed).as('getComment')
+
+    cy.get('.network-btn').click()
+
+    cy.wait('@getComment').its('response.body').should('deep.equal', this.stubbed)
   })
 })
