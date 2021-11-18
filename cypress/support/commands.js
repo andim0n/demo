@@ -45,21 +45,9 @@ Cypress.Commands.add('login', (username, password) => {
   cy.get(loginPage.button.logout).should('be.visible')
 })
 
-Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-  cy.log(options)
-  const domain = Cypress.env('BASE_DOMAIN')
-  if (url !== domain) url = domain
-  return originalFn(url, options)
-  // if (options.search) {
-  //   url = domain
-  // }
-
-  // if (options.timeout > 5000) {
-  //   options.timeout = 5000
-  // }
-
-  // originalFn is the existing `visit` command that you need to call
-  // and it will receive whatever you pass in here.
-  //
-  // make sure to add a return here!
-})
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+//   cy.log(options)
+//   const domain = Cypress.env('BASE_DOMAIN')
+//   if (url !== domain) url = domain
+//   return originalFn(url, options)
+// })
