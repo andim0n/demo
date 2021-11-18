@@ -104,6 +104,6 @@ dist
 .tern-port
 
 # cypress
-fixtures
+# fixtures
 screenshots
 videos
