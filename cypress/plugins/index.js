@@ -25,15 +25,19 @@ module.exports = (on, config) => {
       console.log(message)
       return null
     },
+
     pause(ms) {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         // tasks should not resolve with undefined
         setTimeout(() => resolve(null), ms)
       })
     },
-    setHref: (val) => {
-      return (href = val)
+
+    setHref: val => {
+      href = val
+      return null
     },
+
     getHref: () => {
       return href
     },
