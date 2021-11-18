@@ -1,19 +1,26 @@
 /// <reference types="cypress" />
 
 describe('Cypress custom commands', () => {
-  // best practice to deal with PO
-  // https://www.cypress.io/blog/2019/01/03/stop-using-page-objects-and-start-using-app-actions/#final-thoughts
-  it('As a user I should be able to log in', () => {
+  it('without cy.command', () => {
+    cy.visit('http://the-internet.herokuapp.com/login')
+    cy.get('#username').type('tomsmith')
+    cy.get('#password').type('SuperSecretPassword!')
+    cy.get('[type=submit]').click()
+    cy.contains('You logged into a secure area!')
+    cy.get('a.button').should('be.visible')
+  })
+
+  it('with cy.command', () => {
     cy.login('tomsmith', 'SuperSecretPassword!')
   })
 
-  // it('commands to work with session storage', () => {
-  //   // The read-only sessionStorage property accesses a session Storage object for the current origin.
-  //   cy.setSessionStorage('token', 'abc123')
-  //   cy.getSessionStorage('token').should('eq', 'abc123')
-  // })
+  it('custom commands to work with session storage', () => {
+    // The read-only sessionStorage property accesses a session Storage object for the current origin.
+    cy.setSessionStorage('token', 'abc123')
+    cy.getSessionStorage('token').should('eq', 'abc123')
+  })
 
-  // it('overwrited visit', () => {
-  //   cy.visit('https://yandex.ru')
-  // })
+  it('overwrited visit', () => {
+    cy.visit('https://yandex.ru')
+  })
 })
