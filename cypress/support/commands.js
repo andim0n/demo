@@ -1,5 +1,3 @@
-const loginPage = require('../pages/login')
-
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -26,15 +24,7 @@ const loginPage = require('../pages/login')
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getSessionStorage', key => {
-  cy.window().then(window => window.sessionStorage.getItem(key))
-})
-
-Cypress.Commands.add('setSessionStorage', (key, value) => {
-  cy.window().then(window => {
-    window.sessionStorage.setItem(key, value)
-  })
-})
+const loginPage = require('../pages/login')
 
 Cypress.Commands.add('login', (username, password) => {
   cy.visit(loginPage.url)
@@ -45,9 +35,18 @@ Cypress.Commands.add('login', (username, password) => {
   cy.get(loginPage.button.logout).should('be.visible')
 })
 
+Cypress.Commands.add('getSessionStorage', key => {
+  cy.window().then(window => window.sessionStorage.getItem(key))
+})
+
+Cypress.Commands.add('setSessionStorage', (key, value) => {
+  cy.window().then(window => {
+    window.sessionStorage.setItem(key, value)
+  })
+})
+
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-//   cy.log(options)
-//   const domain = Cypress.env('BASE_DOMAIN')
+//   const domaiWn = Cypress.env('BASE_DOMAIN')
 //   if (url !== domain) url = domain
 //   return originalFn(url, options)
 // })

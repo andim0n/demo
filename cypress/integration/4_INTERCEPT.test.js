@@ -1,9 +1,12 @@
 /// <reference types="cypress" />
 
-const stubbedObject = describe('Spy and stub network responses', () => {
-  beforeEach(function () {
+describe('Spy and stub network responses', () => {
+  before(function () {
     cy.fixture('stubbed.json').as('stubbed')
     cy.fixture('original.json').as('original')
+  })
+
+  beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/aliasing')
   })
 

@@ -1,6 +1,7 @@
+/// <reference types="cypress" />
+
 describe('Handling JS Allerts and PopUps', () => {
   beforeEach(() => {
-    // cy.visit("http://www.webdriveruniversity.com/Contact-Us/contactus.html")
     cy.visit('https://www.webdriveruniversity.com/')
     cy.get('#popup-alerts').invoke('removeAttr', 'target').click({ force: true })
   })
