@@ -16,13 +16,15 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-let href
+// const db = require('../../server/src/db')
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   on('task', {
-    log(message) {
-      console.log(message)
+    // deconstruct the individual properties
+    hello({ greeting, name }) {
+      console.log('%s, %s', greeting, name)
+
       return null
     },
 
@@ -33,13 +35,14 @@ module.exports = (on, config) => {
       })
     },
 
-    setHref: val => {
-      href = val
+    seedDatabase() {
+      //  db.seed('defaults')
       return null
     },
 
-    getHref: () => {
-      return href
+    resetDatabase() {
+      db.reset()
+      return null
     },
   })
 }
