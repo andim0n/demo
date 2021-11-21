@@ -41,7 +41,7 @@ module.exports = (on, config) => {
     },
 
     resetDatabase() {
-      db.reset()
+      // db.reset()
       return null
     },
   })

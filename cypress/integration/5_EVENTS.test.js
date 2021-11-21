@@ -15,7 +15,7 @@ describe('Handling JS Allerts and PopUps', () => {
   })
 
   it('Validate js confirm alert box works correctly when clicking Cancel', () => {
-    cy.get('#button4').click()
+    cy.get('#button4').pause().click()
     cy.on('window:confirm', () => {
       return false
     })

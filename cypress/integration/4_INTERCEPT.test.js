@@ -19,10 +19,12 @@ describe('Spy and stub network responses', () => {
   })
 
   it('stubbing', function () {
-    cy.intercept('GET', '**/comments/*', this.stubbed).as('getComment')
+    const stubbed = { customKey: 'TEST VALUE' }
+
+    cy.intercept('GET', '**/comments/*', stubbed).as('getComment')
 
     cy.get('.network-btn').click()
 
-    cy.wait('@getComment').its('response.body').should('deep.equal', this.stubbed)
+    cy.wait('@getComment').its('response.body').should('deep.equal', stubbed)
   })
 })

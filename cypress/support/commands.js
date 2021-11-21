@@ -45,8 +45,9 @@ Cypress.Commands.add('setSessionStorage', (key, value) => {
   })
 })
 
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-//   const domaiWn = Cypress.env('BASE_DOMAIN')
-//   if (url !== domain) url = domain
-//   return originalFn(url, options)
-// })
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  const blockedDomain = Cypress.env('BLOCKED_DOMAIN')
+  const baseDomain = Cypress.env('BASE_DOMAIN')
+  if (url === blockedDomain) url = baseDomain
+  return originalFn(url, options)
+})
